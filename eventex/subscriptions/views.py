@@ -1,10 +1,11 @@
+from django.contrib import messages
 from django.core import mail
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.template.loader import render_to_string
 
 from eventex.subscriptions.forms import SubscriptionForm
-from django.contrib import messages
+
 
 def subscribe(request):
     if request.method == 'POST':
