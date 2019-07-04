@@ -1,3 +1,5 @@
+import hashlib
+
 from django.core import mail
 from django.test import TestCase
 
@@ -42,15 +44,17 @@ class SubscribeGet(TestCase):
 
 class SubscribePostValid(TestCase):
     def setUp(self):
-        data = dict(name='Allan Lima', cpf='45773653320',
-                    email='arglbr@gmail.com', phone='85-98872-8779')
-        self.resp = self.client.post('/inscricao/', data)
+        self.data = dict(name='Allan Lima', cpf='45773653320',
+                         email='arglbr@gmail.com', phone='85-98872-8779')
+        self.resp = self.client.post('/inscricao/', self.data)
 
     def test_post(self):
-        """ Valid POST should redirect to /inscricao/1/"""
+        """ Valid POST should redirect to /inscricao/hashlib.md5(self.data['email'].encode())/"""
 
         # Já verifica o status code
-        self.assertRedirects(self.resp, '/inscricao/1/')
+        hash_object = hashlib.md5(self.data['email'].encode())
+        self.assertRedirects(self.resp,
+                             f'/inscricao/{hash_object.hexdigest()}/')
 
     def test_send_subscribe_email(self):
         self.assertEqual(1, len(mail.outbox))
