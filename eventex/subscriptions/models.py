@@ -4,7 +4,6 @@ from enum import unique
 from django.db import models
 from django.db.models.fields import CharField
 from django.forms.fields import CharField
-from pygments.lexer import default
 
 
 class Subscription(models.Model):
