@@ -9,3 +9,4 @@ staticfiles
 .ipynb_checkpoints
 *.ipynb
 __MACOSX/
+sqlite
