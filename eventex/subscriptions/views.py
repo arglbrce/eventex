@@ -30,7 +30,8 @@ def create(request):
         return render(request, 'subscriptions/subscription_form.html',
                       {'form': form})
 
-    subscription = Subscription.objects.create(**form.cleaned_data)
+    subscription =  form.save()
+    # subscription = Subscription.objects.create(**form.cleaned_data)
     subscription.hash_url = hashlib.md5(subscription.email.encode()).hexdigest()
     subscription.save()
 
