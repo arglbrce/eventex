@@ -10,3 +10,4 @@ staticfiles
 *.ipynb
 __MACOSX/
 sqlite
+get-pip.py
